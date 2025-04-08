@@ -1,18 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import routes from './routesConfig'
-import NotFound from '../pages/NotFound'
+import { Routes, Route } from 'react-router-dom';
+import Home from '../pages/Home';
 
 const AppRouter = () => {
   return (
-    <Router>
+    <div className="p-4">
       <Routes>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.element} />
-        ))}
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Home />} />
       </Routes>
-    </Router>
-  )
-}
+    </div>
+  );
+};
 
-export default AppRouter
+export default AppRouter;
