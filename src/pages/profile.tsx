@@ -25,9 +25,6 @@ const Profile: React.FC<ProfileProps> = ({ username, avatarUrl }) => {
         <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'>
           Tus pedidos
         </button>
-        <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'>
-          Métodos de pago
-        </button>
         <button
           className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'
           onClick={() => (window.location.href = "/directions")}
