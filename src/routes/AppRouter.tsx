@@ -5,6 +5,8 @@ import Directions from "../pages/Directions"
 import Profile from "../pages/profile"
 import Login from "../pages/login"
 import Signup from "../pages/NewReg"
+import Cart from "../pages/Cart"
+import Orders from "../pages/Orders"
 
 const AppRouter = () => {
   return (
@@ -15,6 +17,8 @@ const AppRouter = () => {
         <Route path='/directions' element={<Directions />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/orders' element={<Orders />} />
         <Route
           path='/profile'
           element={

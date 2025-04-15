@@ -22,7 +22,8 @@ const Profile: React.FC<ProfileProps> = ({ username, avatarUrl }) => {
 
       {/* Options */}
       <div className='flex flex-col w-full space-y-3'>
-        <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'>
+        <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'
+        onClick={() => (window.location.href = "/orders")}>
           Tus pedidos
         </button>
         <button
@@ -31,7 +32,9 @@ const Profile: React.FC<ProfileProps> = ({ username, avatarUrl }) => {
         >
           Tus direcciones
         </button>
-        <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'>
+        <button 
+          className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'
+          onClick={() => (window.location.href = "/configs")}>
           Configuración
         </button>
         <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'>
