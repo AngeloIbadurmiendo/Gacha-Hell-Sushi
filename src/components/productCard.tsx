@@ -1,29 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-interface PlanCardProps {
-  imagen: string;
-  title: string;
-  price: string;
+interface ProductCardProps {
+  imagen: string; // URL de la imagen del producto
+  title: string; // Título del producto
+  price: string; // Precio del producto (formateado como string)
+  onClick: () => void; // Función para manejar el clic en la tarjeta
 }
 
-const productCard: React.FC<PlanCardProps> = ({ title, price,imagen}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ imagen, title, price, onClick }) => {
   return (
-    <div className="bg-white shadow-xl rounded-lg overflow-hidden transition-transform transform hover:scale-105 max-w-sm mx-auto">
-
-      {/* Contenido */}
-      <div className="p-6">
-        <img src={imagen} alt="Imagen del producto" className="w-full h-32 object-fill mb-4 rounded-lg" />
-        {/* Título y precio */}
-        <h2 className="text-gray-800 text-xl font-bold">{title}</h2>
-        <p className="text-2xl font-bold text-gray-800 mb-2">{price}</p>
-        {/* Botón */}
-        <Link to="/contacto" className="bg-secondary text-white w-full py-2 rounded-md hover:bg-orange-700 transition-colors text-center block">
-          AGREGAR
-        </Link>
-      </div>
+    <div
+      onClick={onClick} // Llama a la función onClick al hacer clic en la tarjeta
+      className="cursor-pointer border rounded-lg p-4 shadow hover:shadow-lg transition"
+    >
+      <img
+        src={imagen}
+        alt={title}
+        className="w-full h-32 object-fill rounded-lg mb-2"
+      />
+      <h3 className="text-lg font-bold">{title}</h3>
+      <p className="text-lg font-semibold mt-2">{price}</p>
     </div>
   );
 };
 
-export default productCard;
+export default ProductCard;
