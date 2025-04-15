@@ -84,6 +84,7 @@ const Home = () => {
   return (
     
     <div className="container m-auto max-w-screen-xl relative bg-gradient-to-r from-transparent via-white to-transparent">
+        <h1>Los mas vendidos</h1>
         <Swiper
           className="swiper-custom-style"
           modules={[Navigation, Pagination]}
@@ -107,7 +108,7 @@ const Home = () => {
           ))}
         </Swiper>
         
-
+        <h1>Descuentos de hoy</h1>
         <Swiper
           className="swiper-custom-style"
           modules={[Navigation, Pagination]}
@@ -130,7 +131,7 @@ const Home = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-
+        <h1>Tablas para compartir</h1>
         <Swiper
           className="swiper-custom-style"
           modules={[Navigation, Pagination]}
