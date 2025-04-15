@@ -13,7 +13,7 @@ const productCard: React.FC<PlanCardProps> = ({ title, price,imagen}) => {
 
       {/* Contenido */}
       <div className="p-6">
-        <img src={imagen} alt="Imagen del producto" className="w-full h-32 object-cover mb-4 rounded-lg" />
+        <img src={imagen} alt="Imagen del producto" className="w-full h-32 object-fill mb-4 rounded-lg" />
         {/* Título y precio */}
         <h2 className="text-gray-800 text-xl font-bold">{title}</h2>
         <p className="text-2xl font-bold text-gray-800 mb-2">{price}</p>
