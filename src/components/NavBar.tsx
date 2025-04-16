@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const pages = [
   { name: 'Home', path: '/' },
-  { name: 'Ofertas', path: '/ofertas' },
   { name: 'Iniciá sesión', path: '/login' },
   { name: 'Tu cuenta', path: '/profile' },
 ];

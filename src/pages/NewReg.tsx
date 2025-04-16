@@ -1,58 +1,64 @@
-const Signup =() => {
-    return (
-      <div className='flex flex-col items-center p-6 bg-gray-400 rounded-lg max-w-md mx-auto mt-6 shadow-md'>
-          <div className="bg-green-200 grid grid-cols-4 gap-4 w-full">
-              <div className="bg-blue-200 p-4 col-span-3 flex justify-start text-left">
-                  <h1>Registra tu cuenta</h1>
-              </div>
-              <button className="p-4 col-span-1">
-                  <h1>X</h1>
-              </button>
-          </div>
-          <div className="mt-6 mb-6 w-full">
-              <input
-                type="text"
-                placeholder="Nombre"
-                className="bg-white border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-          </div>
-          <div className="mb-6 w-full">
-              <input
-                type="text"
-                placeholder="Apellido"
-                className="bg-white border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-          </div>
-          <div className="mb-6 w-full">
-              <input
-                type="text"
-                placeholder="Correo electonico"
-                className="bg-white border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-          </div>
-          <div className="mb-6 w-full">
-              <input
-                type="password"
-                placeholder="Contraseña"
-                className="bg-white border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-          </div>
-          <div className="mb-4 flex items-center space-x-2">
-            <div>
-                <input
-                    type="checkbox"
-                    className="form-checkbox h-5 w-5 text-blue-500 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-            </div>
-            <div>
-                <h1>Acepto los terminos y condiciones de uso</h1>
-            </div>
-          </div>
-          <button className="bg-blue-200 border border-black p-3 rounded-full w-3/4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <h1>registrarse</h1>
-          </button>
+const Signup = () => {
+  return (
+    <div className="flex flex-col items-center p-8 bg-white rounded-lg max-w-md mx-auto mt-10 shadow-lg">
+      {/* Header */}
+      <div className="w-full flex justify-between items-center bg-gray-100 p-4 rounded-lg">
+        <h1 className="text-xl font-bold text-gray-800">Registra tu cuenta</h1>
       </div>
-    )
-  }
-  
-  export default Signup
+
+      {/* Input: Nombre */}
+      <div className="mt-6 w-full">
+        <input
+          type="text"
+          placeholder="Nombre"
+          className="bg-gray-100 border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Input: Apellido */}
+      <div className="mt-4 w-full">
+        <input
+          type="text"
+          placeholder="Apellido"
+          className="bg-gray-100 border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Input: Correo Electrónico */}
+      <div className="mt-4 w-full">
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          className="bg-gray-100 border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Input: Contraseña */}
+      <div className="mt-4 w-full">
+        <input
+          type="password"
+          placeholder="Contraseña"
+          className="bg-gray-100 border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Checkbox: Términos y Condiciones */}
+      <div className="mt-4 flex items-center space-x-2 w-full">
+        <input
+          type="checkbox"
+          className="form-checkbox h-5 w-5 text-blue-500 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <label className="text-sm text-gray-600">
+          Acepto los términos y condiciones de uso
+        </label>
+      </div>
+
+      {/* Botón: Registrarse */}
+      <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Registrarse
+      </button>
+    </div>
+  );
+};
+
+export default Signup;
