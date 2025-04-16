@@ -55,7 +55,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-48 object-cover rounded-lg mb-4"
+            className="w-full h-48 object-fill rounded-lg mb-4"
           />
           <h2 className="text-xl font-bold">{product.name}</h2>
           <p className="text-gray-600">{product.description}</p>

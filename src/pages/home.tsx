@@ -36,6 +36,20 @@ const bestSellers: Product[] = [
     price: 20000,
     image: 'https://www.creativefabrica.com/wp-content/uploads/2023/03/02/Sushi-California-Roll-Single-Slice-62976322-1.png',
   },
+  {
+    id: 1,
+    name: 'Sushi Roll',
+    description: 'Sushi con ingredientes A y B',
+    price: 15000,
+    image: 'https://www.smartienda.cl/smartwebsite/pruebas/7013/rpa.jpg',
+  },
+  {
+    id: 1,
+    name: 'Sushi Roll',
+    description: 'Sushi con ingredientes A y B',
+    price: 15000,
+    image: 'https://www.smartienda.cl/smartwebsite/pruebas/7013/rpa.jpg',
+  },
 ];
 
 const discountsToday: Product[] = [
