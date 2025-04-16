@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import Home from "../pages/Home"
+import Home from "../pages/home"
 import ModifyDir from "../pages/ModifyDir"
 import Directions from "../pages/Directions"
 import Profile from "../pages/profile"
@@ -7,6 +7,7 @@ import Login from "../pages/login"
 import Signup from "../pages/NewReg"
 import Cart from "../pages/Cart"
 import Orders from "../pages/Orders"
+import OrderDetailWrapper from "../components/OrderDetailWrapper"
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/orders' element={<Orders />} />
+        <Route path='/orders/:orderId' element={<OrderDetailWrapper/>} />
         <Route
           path='/profile'
           element={

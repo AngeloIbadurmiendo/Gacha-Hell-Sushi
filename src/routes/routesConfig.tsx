@@ -1,9 +1,10 @@
 import Directions from "../pages/Directions"
-import Home from "../pages/Home"
+import Home from "../pages/home"
 import ModifyDir from "../pages/ModifyDir"
 import Profile from "../pages/profile"
 import Login from "../pages/login"
 import Signup from "../pages/NewReg"
+
 
 const routes = [
   {
@@ -30,6 +31,7 @@ const routes = [
     path: "/signup",
     element: <Signup />,
   },
+
 ]
 
 export default routes
