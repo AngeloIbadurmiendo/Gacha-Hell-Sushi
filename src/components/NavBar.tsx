@@ -102,7 +102,7 @@ const NavBar = () => {
               ))}
               <li>
                 <Link
-                  to="/carrito"
+                  to="/cart"
                   className="text-gray-800 hover:text-gray-600 transition-colors"
                   onClick={handleCloseDrawer}
                 >
