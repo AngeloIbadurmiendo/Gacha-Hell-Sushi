@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface CartItem {
   id: number;
@@ -35,7 +36,7 @@ const Cart: React.FC = () => {
         'https://cdn-icons-png.flaticon.com/512/1040/1040204.png', // Ajusta la URL a tu icono o imagen
     },
   ]);
-
+  const navigate = useNavigate();
   // Maneja el incremento de la cantidad de un producto
   const handleIncrement = (id: number) => {
     setCartItems((prevItems) =>
@@ -70,11 +71,10 @@ const Cart: React.FC = () => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-
-  // Redirige o ejecuta la acción deseada al pulsar "Ir a pagar"
+  
+  // Redirige al pulsar "Ir a pagar"
   const handleCheckout = () => {
-    alert('Ir a la página de pago');
-    // Aquí podrías hacer window.location.href = "/checkout" o usar react-router
+    navigate("/checkout"); // Redirige a la página de checkout
   };
 
   return (

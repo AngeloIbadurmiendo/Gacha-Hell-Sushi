@@ -8,6 +8,7 @@ import Signup from "../pages/NewReg"
 import Cart from "../pages/Cart"
 import Orders from "../pages/Orders"
 import OrderDetailWrapper from "../components/OrderDetailWrapper"
+import Checkout from "../pages/Checkout"
 
 const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
         <Route path='/cart' element={<Cart />} />
         <Route path='/orders' element={<Orders />} />
         <Route path='/orders/:orderId' element={<OrderDetailWrapper/>} />
+        <Route path="/checkout" element={<Checkout/>} />
         <Route
           path='/profile'
           element={
