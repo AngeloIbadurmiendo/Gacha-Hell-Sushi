@@ -67,6 +67,12 @@ const AdminProducts: React.FC = () => {
           </tbody>
         </table>
       </div>
+      <button
+        onClick={() => (window.location.href = "/admin")}
+        className='mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'
+      >
+        Volver
+      </button>
     </div>
   )
 }
