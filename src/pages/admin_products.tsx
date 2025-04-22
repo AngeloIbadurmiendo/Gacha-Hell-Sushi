@@ -29,43 +29,74 @@ const AdminProducts: React.FC = () => {
         </button>
       </div>
       <div className='overflow-x-auto'>
-        <table className='min-w-full bg-white border border-gray-200'>
-          <thead>
-            <tr>
-              <th className='px-4 py-2 border-b'>ID</th>
-              <th className='px-4 py-2 border-b'>Ingrediente</th>
-              <th className='px-4 py-2 border-b'>Cantidad</th>
-              <th className='px-4 py-2 border-b'>Unidad</th>
-              <th className='px-2 py-1 border-b'>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {materials.map((material) => (
-              <tr key={material.id} className='hover:bg-gray-400'>
-                <td className='px-4 py-2 border-b text-center'>
-                  {material.id}
-                </td>
-                <td className='px-4 py-2 border-b'>{material.name}</td>
-                <td className='px-4 py-2 border-b text-center'>
-                  {material.quantity}
-                </td>
-                <td className='px-4 py-2 border-b text-center'>
-                  {material.unit}
-                </td>
-                <td className='px-4 py-2 border-b text-center'>
-                  <div className='flex justify-center items-center gap-2'>
-                    <button
-                      onClick={() => handleModifyQuantity(material.id)}
-                      className='p-1 text-white bg-green-700 hover:bg-green-800 text-sm rounded'
-                    >
-                      Editar
-                    </button>
-                  </div>
-                </td>
+        <div className='hidden md:block'>
+          <table className='min-w-full bg-white border border-gray-200'>
+            <thead>
+              <tr>
+                <th className='px-4 py-2 border-b'>ID</th>
+                <th className='px-4 py-2 border-b'>Ingrediente</th>
+                <th className='px-4 py-2 border-b'>Cantidad</th>
+                <th className='px-4 py-2 border-b'>Unidad</th>
+                <th className='px-2 py-1 border-b'>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {materials.map((material) => (
+                <tr key={material.id} className='hover:bg-gray-400'>
+                  <td className='px-4 py-2 border-b text-center'>
+                    {material.id}
+                  </td>
+                  <td className='px-4 py-2 border-b'>{material.name}</td>
+                  <td className='px-4 py-2 border-b text-center'>
+                    {material.quantity}
+                  </td>
+                  <td className='px-4 py-2 border-b text-center'>
+                    {material.unit}
+                  </td>
+                  <td className='px-4 py-2 border-b text-center'>
+                    <div className='flex justify-center items-center gap-2'>
+                      <button
+                        onClick={() => handleModifyQuantity(material.id)}
+                        className='p-1 text-white bg-green-700 hover:bg-green-800 text-sm rounded'
+                      >
+                        Editar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className='block md:hidden'>
+          {materials.map((material) => (
+            <div
+              key={material.id}
+              className='mb-4 p-4 bg-white border border-gray-200 rounded shadow'
+            >
+              <p>
+                <strong>ID:</strong> {material.id}
+              </p>
+              <p>
+                <strong>Ingrediente:</strong> {material.name}
+              </p>
+              <p>
+                <strong>Cantidad:</strong> {material.quantity}
+              </p>
+              <p>
+                <strong>Unidad:</strong> {material.unit}
+              </p>
+              <div className='mt-2'>
+                <button
+                  onClick={() => handleModifyQuantity(material.id)}
+                  className='p-1 text-white bg-green-700 hover:bg-green-800 text-sm rounded'
+                >
+                  Editar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <button
         onClick={() => (window.location.href = "/admin")}

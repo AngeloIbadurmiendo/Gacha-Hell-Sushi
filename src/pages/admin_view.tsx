@@ -2,9 +2,9 @@ import React from "react"
 
 const AdminView: React.FC = () => {
   return (
-    <div className='flex h-screen bg-gray-100'>
+    <div className='flex flex-col md:flex-row h-screen bg-gray-100'>
       {/* Sidebar */}
-      <aside className='w-64 bg-blue-900 text-white flex flex-col'>
+      <aside className='w-full md:w-64 bg-blue-900 text-white flex flex-col'>
         <div className='p-4 text-center font-bold text-xl border-b border-blue-700'>
           Dashboard
         </div>
@@ -43,7 +43,7 @@ const AdminView: React.FC = () => {
         <h1 className='text-2xl font-bold text-gray-800 mb-4'>
           Bienvenido, Administrador
         </h1>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
           {/* Example Cards */}
           <div className='p-4 bg-white rounded-lg shadow-md'>
             <h2 className='text-lg font-semibold text-gray-800'>
