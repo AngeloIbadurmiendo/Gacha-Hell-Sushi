@@ -100,7 +100,7 @@ const AdminProducts: React.FC = () => {
       </div>
       <button
         onClick={() => (window.location.href = "/admin")}
-        className='mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'
+        className='mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full md:w-auto'
       >
         Volver
       </button>

@@ -84,7 +84,7 @@ const AdminUsers = () => {
       </div>
       <button
         onClick={() => (window.location.href = "/admin")}
-        className='mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'
+        className='mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full sm:w-auto'
       >
         Volver
       </button>
