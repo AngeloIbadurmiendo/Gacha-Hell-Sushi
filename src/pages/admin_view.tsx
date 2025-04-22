@@ -10,12 +10,6 @@ const AdminView: React.FC = () => {
         </div>
         <nav className='flex-1 p-4 space-y-4'>
           <a
-            href='/admin/dashboard'
-            className='block py-2 px-4 rounded hover:bg-blue-700'
-          >
-            Dashboard
-          </a>
-          <a
             href='/admin/orders'
             className='block py-2 px-4 rounded hover:bg-blue-700'
           >

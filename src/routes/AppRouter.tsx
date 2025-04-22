@@ -12,7 +12,6 @@ import Checkout from "../pages/Checkout"
 import AdminView from "../pages/admin_view"
 import AdminOrders from "../pages/admin_orders"
 import AdminUsers from "../pages/admin_users"
-import Dashboard from "../pages/dashboard"
 import AdminProducts from "../pages/admin_products"
 
 const AppRouter = () => {
@@ -31,7 +30,6 @@ const AppRouter = () => {
         <Route path='/admin' element={<AdminView />} />
         <Route path='/admin/orders' element={<AdminOrders />} />
         <Route path='/admin/users' element={<AdminUsers />} />
-        <Route path='/admin/dashboard' element={<Dashboard />} />
         <Route path='/admin/products' element={<AdminProducts />} />
         <Route
           path='/profile'
