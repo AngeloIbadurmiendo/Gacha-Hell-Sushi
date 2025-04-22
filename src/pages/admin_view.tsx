@@ -6,7 +6,7 @@ const AdminView: React.FC = () => {
       {/* Sidebar */}
       <aside className='w-64 bg-blue-900 text-white flex flex-col'>
         <div className='p-4 text-center font-bold text-xl border-b border-blue-700'>
-          Admin Panel
+          Dashboard
         </div>
         <nav className='flex-1 p-4 space-y-4'>
           <a
