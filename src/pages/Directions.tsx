@@ -34,16 +34,13 @@ const Directions: React.FC = () => {
   }
 
   return (
-    <div className='bg-gray-100 p-5 rounded-lg max-w-md mx-auto shadow-lg relative w-11/12'>
-      <h2 className='text-xl font-bold mb-5 text-center'>Tus direcciones</h2>
-      <button className='absolute top-2 right-2 text-2xl bg-transparent border-none cursor-pointer'>
-        &times;
-      </button>
+    <div className='bg-gray-100 p-5 rounded-lg max-w-md mx-auto relative w-11/12'>
+      <h2 className='text-3xl font-bold mb-5 text-center'>Tus direcciones</h2>
       <div className='flex flex-col gap-4'>
         {addresses.map((address) => (
           <div
             key={address.id}
-            className='flex justify-between items-center p-3 bg-white rounded-lg shadow-md flex-wrap'
+            className='flex justify-between items-center p-8 bg-white rounded-lg shadow-[0_4px_6px_rgba(0,0,0,0.5)] flex-wrap'
           >
             <div className='flex flex-col flex-1 min-w-[150px]'>
               <p className='text-base font-bold'>{address.street}</p>
@@ -56,7 +53,7 @@ const Directions: React.FC = () => {
             </div>
             <div className='flex gap-2 mt-2 justify-center flex-1'>
               <button
-                className='px-3 py-1 bg-gray-600 text-white rounded-lg text-sm'
+                className='px-3 py-1 bg-blue-400 text-white rounded-lg text-sm'
                 onClick={() => handleModify(address.id)}
               >
                 Modificar
@@ -72,7 +69,7 @@ const Directions: React.FC = () => {
         ))}
       </div>
       <button
-        className='mt-5 px-4 py-2 bg-blue-900 text-white rounded-lg text-base w-full'
+        className='mt-8 py-2 bg-blue-900 text-white rounded-full text-base w-1/2 mx-auto block'
         onClick={handleAdd}
       >
         Añadir una dirección

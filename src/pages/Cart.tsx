@@ -78,16 +78,16 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-5 rounded-lg max-w-md mx-auto shadow-lg relative w-11/12 mt-4">
+    <div className="bg-gray-100 p-5 rounded-lg max-w-md mx-auto relative w-11/12 mt-4">
       {/* Título */}
-      <h2 className="text-xl font-bold mb-5 text-center">Carrito</h2>
+      <h2 className="text-3xl font-bold mb-5 text-center">Carrito</h2>
 
       {/* Lista de ítems del carrito */}
       <div className="flex flex-col gap-4">
         {cartItems.map((item) => (
           <div
             key={item.id}
-            className="flex items-center justify-between p-3 bg-white rounded-lg shadow-md flex-wrap gap-2"
+            className="flex items-center justify-between p-5 bg-white rounded-lg shadow-[0_4px_6px_rgba(0,0,0,0.5)] flex-wrap gap-2"
           >
             {/* Imagen del producto */}
             <img
@@ -105,16 +105,16 @@ const Cart: React.FC = () => {
             </div>
 
             {/* Botones +, - y cantidad */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1/4 bg-blue-400 rounded-full text-white">
               <button
-                className="bg-gray-200 rounded-md px-2 font-bold"
+                className=" rounded-md px-2 font-bold"
                 onClick={() => handleDecrement(item.id)}
               >
                 -
               </button>
               <p className="w-6 text-center">{item.quantity}</p>
               <button
-                className="bg-gray-200 rounded-md px-2 font-bold"
+                className=" rounded-md px-2 font-bold"
                 onClick={() => handleIncrement(item.id)}
               >
                 +

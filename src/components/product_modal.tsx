@@ -27,7 +27,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/50 bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md relative">
         {/* Close Button */}
         <button

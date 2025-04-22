@@ -115,8 +115,8 @@ const Home = () => {
   };
 
   const renderSection = (title: string, products: Product[]) => (
-    <div className="mb-12">
-      <h1 className="text-2xl font-semibold mb-4">{title}</h1>
+    <div className="mb-4">
+      <h1 className="text-2xl font-semibold">{title}</h1>
       <Swiper
         className="swiper-custom-style"
         modules={[Navigation, Pagination]}
@@ -126,7 +126,7 @@ const Home = () => {
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
-        style={{ padding: 35, paddingBottom: '70px' }}
+        style={{ padding: 35, paddingBottom: '50px' }}
         navigation
         pagination={{ clickable: true }}
       >

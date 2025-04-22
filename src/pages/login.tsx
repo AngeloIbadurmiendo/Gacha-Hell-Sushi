@@ -1,6 +1,6 @@
 const Login = () => {
   return (
-    <div className="flex flex-col items-center p-8 bg-white rounded-lg max-w-sm mx-auto mt-10 shadow-lg">
+    <div className="flex flex-col items-center p-8 bg-[#FDF0D5] rounded-lg max-w-sm mx-auto mt-10 shadow-lg">
       {/* Header */}
       <div className="w-full text-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Inicia Sesión</h1>
@@ -26,13 +26,13 @@ const Login = () => {
       </div>
 
       {/* Botón: Iniciar Sesión */}
-      <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+      <button className="w-full bg-blue-900 text-white py-3 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
         Iniciar Sesión
       </button>
 
       {/* Botón: Registrarse */}
       <button
-        className="w-full bg-gray-100 text-gray-800 py-3 rounded-lg border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-blue-400 text-white py-3 rounded-full border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
         onClick={() => (window.location.href = '/signup')}
       >
         Registrarse

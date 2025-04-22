@@ -42,7 +42,7 @@ const NavBar = () => {
             <img
               src="./logo_fukusuke.jpg"
               alt="Logo Fukusuke"
-              className={`object-contain ${windowWidth <= 600 ? 'h-8 w-20' : 'h-10 w-28'}`}
+              className={`object-contain ${windowWidth <= 600 ? 'h-16 w-20' : 'h-10 w-28'}`}
             />
           </Link>
         </div>
@@ -74,25 +74,26 @@ const NavBar = () => {
       {/* Mobile Drawer */}
       {drawerOpen && (
         <div
-          className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50"
+          className="fixed inset-0 bg-black/0 bg-opacity-50 z-50 "
           onClick={handleCloseDrawer}
         >
           <div
-            className="bg-[#fdf0d5] w-64 h-full shadow-lg p-4"
+            className="bg-gray-300/95 w-64 h-full shadow-lg text-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <button onClick={handleCloseDrawer} className="text-gray-800 focus:outline-none mb-4">
+            <button onClick={handleCloseDrawer} className="text-gray-800 focus:outline-none mb-4 p-4">
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <ul className="space-y-4">
+            <ul className="space-y-4 divide-y divide-black-1000 w-full">
+              <li></li>
               {pages.map((page) => (
                 <li key={page.name}>
                   <Link
                     to={page.path}
-                    className="text-gray-800 hover:text-gray-600 transition-colors"
+                    className="text-gray-800 hover:text-gray-600 transition-colors text-xl"
                     onClick={handleCloseDrawer}
                   >
                     {page.name}
@@ -102,12 +103,13 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/cart"
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
+                  className="text-gray-800 hover:text-gray-600 transition-colors text-xl"
                   onClick={handleCloseDrawer}
                 >
                   Carrito
                 </Link>
               </li>
+              <li></li>
             </ul>
           </div>
         </div>

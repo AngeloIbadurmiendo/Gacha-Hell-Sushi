@@ -18,30 +18,30 @@ const Profile: React.FC<ProfileProps> = ({ username, avatarUrl }) => {
       />
 
       {/* Username */}
-      <h2 className='text-xl font-bold mb-6 text-center'>{username}</h2>
+      <h2 className='text-3xl font-bold mb-6 text-center'>{username}</h2>
 
       {/* Options */}
-      <div className='flex flex-col w-full space-y-3'>
-        <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'
+      <div className='flex flex-col w-full space-y-7'>
+        <button className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'
         onClick={() => (window.location.href = "/orders")}>
           Tus pedidos
         </button>
         <button
-          className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'
+          className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'
           onClick={() => (window.location.href = "/directions")}
         >
           Tus direcciones
         </button>
         <button 
-          className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'
+          className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'
           onClick={() => (window.location.href = "/configs")}>
           Configuración
         </button>
-        <button className='py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700'>
+        <button className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'>
           Ayuda
         </button>
         <button
-          className='py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500'
+          className='py-2 bg-blue-400 text-white rounded-full hover:bg-gray-500'
           onClick={() => (window.location.href = "/login")}
         >
           Cerrar sesión
