@@ -27,24 +27,23 @@ const OrderDetail: React.FC<OrderProps & { onBack?: () => void }> = ({
   items,
   deliveryFee,
   status,
-  onBack, // Nueva prop para manejar el botón de regreso
+  onBack,
 }) => {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const total = subtotal + deliveryFee;
 
-  // Función para determinar el estilo de cada estado
   const getStepStyle = (step: string) => {
     if (step === 'received') {
-      return "bg-blue-300 text-gray-600"; // Pedido recibido - Azul claro
+      return "bg-blue-300 text-gray-600";
     }
     if (step === 'preparing') {
-      return "bg-blue-900 text-white"; // En preparación - Azul fuerte (actual)
+      return "bg-blue-900 text-white";
     }
-    return "bg-gray-300 text-gray-600"; // En camino - Gris (aún no ha ocurrido)
+    return "bg-gray-300 text-gray-600";
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="w-full max-w-3xl mx-auto p-6 lg:p-10 bg-white rounded-lg shadow-md">
       {/* Botón para volver */}
       {onBack && (
         <button
@@ -63,10 +62,9 @@ const OrderDetail: React.FC<OrderProps & { onBack?: () => void }> = ({
 
       <div className="border-t border-gray-200 my-4"></div>
 
-      {/* Barra de seguimiento del pedido - solo visible si el estado es "en curso" */}
+      {/* Barra de seguimiento del pedido */}
       {status === 'en curso' && (
         <div className="flex items-center justify-between my-6">
-          {/* Paso 1: Pedido recibido */}
           <div className="flex flex-col items-center flex-1">
             <div className={`w-6 h-6 rounded-full ${getStepStyle('received')}`}></div>
             <span className="text-xs mt-2 text-center">
@@ -76,7 +74,6 @@ const OrderDetail: React.FC<OrderProps & { onBack?: () => void }> = ({
 
           <div className="w-6 border-t-4 mx-1"></div>
 
-          {/* Paso 2: En preparación */}
           <div className="flex flex-col items-center flex-1">
             <div className={`w-6 h-6 rounded-full ${getStepStyle('preparing')}`}></div>
             <span className="text-xs mt-2 font-semibold text-center">
@@ -86,7 +83,6 @@ const OrderDetail: React.FC<OrderProps & { onBack?: () => void }> = ({
 
           <div className="w-6 border-t-4 mx-1"></div>
 
-          {/* Paso 3: En camino */}
           <div className="flex flex-col items-center flex-1">
             <div className={`w-6 h-6 rounded-full ${getStepStyle('on-the-way')}`}></div>
             <span className="text-xs mt-2 text-center">
