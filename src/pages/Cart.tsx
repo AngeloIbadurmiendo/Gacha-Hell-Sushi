@@ -17,7 +17,7 @@ const Cart: React.FC = () => {
       price: 4990,
       quantity: 1,
       image:
-        'https://cdn-icons-png.flaticon.com/512/1040/1040204.png', // Ajusta la URL a tu icono o imagen
+        'https://www.smartienda.cl/smartwebsite/pruebas/7013/rpa.jpg', // Ajusta la URL a tu icono o imagen
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ const Cart: React.FC = () => {
       price: 6990,
       quantity: 1,
       image:
-        'https://cdn-icons-png.flaticon.com/512/1040/1040204.png', // Ajusta la URL a tu icono o imagen
+        'https://www.creativefabrica.com/wp-content/uploads/2023/03/02/Sushi-California-Roll-Single-Slice-62976322-1.png', // Ajusta la URL a tu icono o imagen
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const Cart: React.FC = () => {
       price: 4990,
       quantity: 1,
       image:
-        'https://cdn-icons-png.flaticon.com/512/1040/1040204.png', // Ajusta la URL a tu icono o imagen
+        'https://sushiblues.cl/cdn/shop/files/RollYasai.jpg?v=1710212178', // Ajusta la URL a tu icono o imagen
     },
   ]);
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ const Cart: React.FC = () => {
             <img
               src={item.image}
               alt={item.name}
-              className="w-16 h-16 object-cover rounded-md mr-3"
+              className="w-16 h-16 object-contain rounded-md mr-3 "
             />
 
             {/* Nombre y precio */}
