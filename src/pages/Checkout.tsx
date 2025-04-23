@@ -40,39 +40,42 @@ const Checkout: React.FC = () => {
     switch (step) {
       case 1:
         return (
-          <section className="bg-gray-300 divide-y divide-black-1000 rounded-md">
-            <div>
-            <h2 className="text-lg font-semibold text-gray-800 mb-3">Dirección de despacho</h2>
-            <div className="text-sm text-gray-600 mb-6">
-              <p>{address.name}</p>
-              <p>{address.street}</p>
-              <p>{address.city}</p>
-              <p>{address.country}</p>
-            </div>
-            <button className="text-sm font-medium text-green-600 hover:text-green-700 mb-6">
-              Cambiar dirección
-            </button>
+          <section className="bg-gray-100 p-6 md:p-8 lg:p-10 rounded-md shadow-md lg:max-w-full">
+            {/* Dirección de despacho */}
+            <div className="mb-6">
+              <h2 className="text-lg font-semibold text-gray-800 mb-3">Dirección de despacho</h2>
+              <div className="bg-gray-50 p-4 rounded-md">
+                <p className="font-medium">{address.name}</p>
+                <p>{address.street}</p>
+                <p>{address.city}</p>
+                <p>{address.country}</p>
+              </div>
+              <button className="text-sm font-medium text-blue-600 hover:text-blue-700 mt-4">
+                Cambiar dirección
+              </button>
             </div>
 
-            <div>
-            <h2 className="text-lg font-semibold text-gray-800 mb-3">Detalle del pedido</h2>
-            <div className="space-y-2">
-              {orderItems.map((item, index) => (
-                <div key={index} className="flex justify-between items-center text-sm">
-                  <span className="text-gray-700">
-                    {item.quantity} {item.name}
-                  </span>
-                  <span className="font-medium text-gray-900">{formatCurrency(item.price)}</span>
+            {/* Detalle del pedido */}
+            <div className="mb-6">
+              <h2 className="text-lg font-semibold text-gray-800 mb-3">Detalle del pedido</h2>
+              <div className="space-y-3">
+                {orderItems.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center">
+                    <span className="text-gray-700">
+                      {item.quantity} <span className="font-medium">{item.name}</span>
+                    </span>
+                    <span className="font-medium text-gray-900">{formatCurrency(item.price)}</span>
+                  </div>
+                ))}
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-700">Despacho a domicilio</span>
+                  <span className="font-medium text-gray-900">{formatCurrency(deliveryFee)}</span>
                 </div>
-              ))}
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-700">Despacho a domicilio</span>
-                <span className="font-medium text-gray-900">{formatCurrency(deliveryFee)}</span>
-              </div>
               </div>
             </div>
 
-            <div className="flex justify-between items-center mt-6">
+            {/* Total */}
+            <div className="flex justify-between items-center">
               <span className="text-lg font-bold text-gray-800">Total</span>
               <span className="text-xl font-bold text-gray-900">{formatCurrency(total)}</span>
             </div>
@@ -80,45 +83,41 @@ const Checkout: React.FC = () => {
         );
       case 2:
         return (
-          <section className="bg-gray-300 rounded-md">
+          <section className="bg-gray-100 p-6 rounded-md shadow-md">
             <h2 className="text-lg font-semibold text-gray-800 mb-3">Medio de pago</h2>
             <p className="text-sm text-gray-600 mb-6">
               Serás redirigido a un tercero para completar el pago. Por favor, selecciona tu medio de pago preferido.
             </p>
             <div className="flex justify-center">
-            <a
-              href="https://www.flow.cl/" // Cambia esto al enlace real del medio de pago
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md"
-            >
-              Ir a Flow
-            </a>
+              <a
+                href="https://www.flow.cl/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md"
+              >
+                Ir a Flow
+              </a>
             </div>
           </section>
         );
       case 3:
         return (
-          <section className="bg-gray-300 rounded-md divide-y divide-black-1000">
-            <div>
+          <section className="bg-gray-100 p-6 rounded-md shadow-md">
             <h2 className="text-lg font-semibold text-gray-800 mb-3">Compra finalizada</h2>
             <div className="flex justify-between items-center mb-8">
               <span className="text-xl font-bold text-gray-800">Total</span>
               <span className="text-2xl font-bold text-gray-900">{formatCurrency(total)}</span>
             </div>
-            </div>
-            <div>
             <p className="text-sm text-gray-600">
               Gracias por tu compra. Tu pedido está en proceso y será despachado pronto.
             </p>
             <div className="flex justify-center">
-            <button
-              onClick={handleHome} // Redirige al Home
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md mt-6"
-            >
-              Volver al inicio
-            </button>
-            </div>
+              <button
+                onClick={handleHome}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md mt-6"
+              >
+                Volver al inicio
+              </button>
             </div>
           </section>
         );
@@ -129,7 +128,7 @@ const Checkout: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      <main className="flex-grow p-4 md:p-10 lg:max-w-4xl lg:mx-auto">
+      <main className="flex-grow p-4 md:p-10 lg:max-w-5xl lg:mx-auto">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">Checkout</h1>
 
         {/* Indicador de progreso */}
