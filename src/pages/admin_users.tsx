@@ -21,13 +21,13 @@ const AdminUsers = () => {
   ]
 
   return (
-    <div className='p-6'>
-      <h1 className='text-2xl font-bold mb-4'>Usuarios</h1>
+    <div className='p-6 bg-gray-100'>
+      <h1 className='text-3xl font-bold mb-4 '>Usuarios</h1>
       <div className='overflow-x-auto'>
         <div className='hidden sm:block'>
           <table className='min-w-full bg-white border border-gray-200 rounded-lg'>
             <thead>
-              <tr className='bg-gray-100'>
+              <tr className='bg-gray-200'>
                 <th className='px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider'>
                   ID
                 </th>
@@ -64,7 +64,7 @@ const AdminUsers = () => {
           {users.map((user) => (
             <div
               key={user.id}
-              className='border border-gray-200 rounded-lg mb-4 p-4 bg-white'
+              className='border border-gray-200 rounded-lg mb-4 p-4 bg-white shadow-[0_4px_6px_rgba(0,0,0,0.5)]'
             >
               <p className='text-sm text-gray-700'>
                 <span className='font-medium'>ID:</span> {user.id}
@@ -84,7 +84,7 @@ const AdminUsers = () => {
       </div>
       <button
         onClick={() => (window.location.href = "/admin")}
-        className='mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full sm:w-auto'
+        className='mt-6 bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-600 w-full sm:w-auto'
       >
         Volver
       </button>

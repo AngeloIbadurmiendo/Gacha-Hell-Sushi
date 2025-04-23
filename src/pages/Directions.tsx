@@ -59,7 +59,7 @@ const Directions: React.FC = () => {
                 Modificar
               </button>
               <button
-                className='px-3 py-1 bg-red-600 text-white rounded-lg text-sm'
+                className='px-3 py-1 bg-red-400 text-white rounded-lg text-sm'
                 onClick={() => handleDelete(address.id)}
               >
                 🗑

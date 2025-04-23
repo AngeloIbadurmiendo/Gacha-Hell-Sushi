@@ -28,9 +28,9 @@ const AppRouter = () => {
         <Route path='/orders/:orderId' element={<OrderDetailWrapper />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/admin' element={<AdminView />} />
-        <Route path='/admin/orders' element={<AdminOrders />} />
-        <Route path='/admin/users' element={<AdminUsers />} />
-        <Route path='/admin/products' element={<AdminProducts />} />
+        <Route path='/admin_orders' element={<AdminOrders />} />
+        <Route path='/admin_users' element={<AdminUsers />} />
+        <Route path='/admin_products' element={<AdminProducts />} />
         <Route
           path='/profile'
           element={

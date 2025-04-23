@@ -123,7 +123,7 @@ const Cart: React.FC = () => {
 
             {/* Botón para borrar el ítem */}
             <button
-              className="text-white bg-red-600 rounded-md px-2 py-1"
+              className="text-white bg-red-400 rounded-md px-2 py-1"
               onClick={() => handleDelete(item.id)}
             >
               🗑
