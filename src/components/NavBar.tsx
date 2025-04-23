@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 const pages = [
   { name: 'Home', path: '/' },
   { name: 'Iniciá sesión', path: '/login' },
+  { name: 'Registro', path: '/signup' },
   { name: 'Tu cuenta', path: '/profile' },
+  
 ];
 
 const NavBar = () => {
