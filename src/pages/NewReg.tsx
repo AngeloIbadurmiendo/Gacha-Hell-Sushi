@@ -1,10 +1,10 @@
 const Signup = () => {
   return (
-    <div className="flex flex-col items-center p-8 bg-white rounded-lg max-w-md mx-auto mt-10 shadow-lg">
+    <div className="flex flex-col items-center p-8 bg-[#FDF0D5] rounded-lg max-w-md mx-auto mt-10 shadow-lg">
       {/* Header */}
-      <div className="w-full flex justify-between items-center bg-gray-100 p-4 rounded-lg">
-        <h1 className="text-xl font-bold text-gray-800">Registra tu cuenta</h1>
-      </div>
+      <div className="w-full flex justify-between items-center bg-[#FDF0D5] p-4 rounded-lg">
+        <h1 className="text-xl font-bold text-gray-800 mx-auto">Registra tu cuenta</h1>
+      </div>  
 
       {/* Input: Nombre */}
       <div className="mt-6 w-full">

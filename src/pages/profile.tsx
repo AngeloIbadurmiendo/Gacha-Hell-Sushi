@@ -1,54 +1,59 @@
-import React from "react"
-
-// TODO: Agregar estilos correctos
+import React from "react";
+import { Link } from "react-router-dom";
 
 interface ProfileProps {
-  username: string
-  avatarUrl: string
+  username: string;
+  avatarUrl: string;
 }
 
 const Profile: React.FC<ProfileProps> = ({ username, avatarUrl }) => {
   return (
-    <div className='flex flex-col items-center p-6 bg-gray-100 rounded-lg max-w-md mx-auto mt-6 shadow-md'>
+    <div className="flex flex-col items-center p-6 bg-gray-100 rounded-lg max-w-md mx-auto mt-6 shadow-md">
       {/* Avatar */}
       <img
         src={avatarUrl}
         alt={`${username}'s avatar`}
-        className='w-24 h-24 rounded-full mb-4 border-2 border-gray-300'
+        className="w-24 h-24 rounded-full mb-4 border-2 border-gray-300"
       />
 
       {/* Username */}
-      <h2 className='text-3xl font-bold mb-6 text-center'>{username}</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">{username}</h2>
 
       {/* Options */}
-      <div className='flex flex-col w-full space-y-7'>
-        <button className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'
-        onClick={() => (window.location.href = "/orders")}>
+      <div className="flex flex-col w-full space-y-7">
+        <Link
+          to="/orders"
+          className="py-2 bg-blue-900 text-white rounded-full text-center hover:bg-blue-700"
+        >
           Tus pedidos
-        </button>
-        <button
-          className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'
-          onClick={() => (window.location.href = "/directions")}
+        </Link>
+        <Link
+          to="/directions"
+          className="py-2 bg-blue-900 text-white rounded-full text-center hover:bg-blue-700"
         >
           Tus direcciones
-        </button>
-        <button 
-          className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'
-          onClick={() => (window.location.href = "/configs")}>
+        </Link>
+        <Link
+          to="/configs"
+          className="py-2 bg-blue-900 text-white rounded-full text-center hover:bg-blue-700"
+        >
           Configuración
-        </button>
-        <button className='py-2 bg-blue-900 text-white rounded-full hover:bg-blue-700'>
+        </Link>
+        <Link
+          to="/help"
+          className="py-2 bg-blue-900 text-white rounded-full text-center hover:bg-blue-700"
+        >
           Ayuda
-        </button>
-        <button
-          className='py-2 bg-blue-400 text-white rounded-full hover:bg-gray-500'
-          onClick={() => (window.location.href = "/login")}
+        </Link>
+        <Link
+          to="/login"
+          className="py-2 bg-blue-400 text-white rounded-full text-center hover:bg-gray-500"
         >
           Cerrar sesión
-        </button>
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom"; // Importa Link desde react-router-dom
+
 const Login = () => {
   return (
     <div className="flex flex-col items-center p-8 bg-[#FDF0D5] rounded-lg max-w-sm mx-auto mt-10 shadow-lg">
@@ -31,12 +34,12 @@ const Login = () => {
       </button>
 
       {/* Botón: Registrarse */}
-      <button
-        className="w-full bg-blue-400 text-white py-3 rounded-full border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => (window.location.href = '/signup')}
+      <Link
+        to="/signup" // Navegación con Link
+        className="w-full bg-blue-400 text-white py-3 rounded-full text-center border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         Registrarse
-      </button>
+      </Link>
     </div>
   );
 };

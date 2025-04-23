@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { orders } from "../data/orders"; 
 
 const Orders: React.FC = () => {
@@ -33,6 +33,15 @@ const Orders: React.FC = () => {
 
   return (
     <div className="bg-gray-100 p-5 rounded-lg max-w-md mx-auto relative w-11/12 mt-4">
+      {/* Botón "Volver al perfil" como una X */}
+      <Link
+        to="/profile"
+        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+        aria-label="Cerrar"
+      >
+        &times;
+      </Link>
+
       <h2 className="text-3xl font-bold mb-4 text-center">Tus pedidos</h2>
       <div className="flex flex-col gap-4">
         {orders.map((order) => (
