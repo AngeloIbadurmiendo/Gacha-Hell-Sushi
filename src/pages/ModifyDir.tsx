@@ -1,96 +1,114 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Importa Link de react-router-dom
+import React, { useState } from "react"
+import { Link } from "react-router-dom" // Importa Link de react-router-dom
 
 const ModifyDir: React.FC = () => {
-  const [region, setRegion] = useState("");
-  const [city, setCity] = useState("");
-  const [street, setStreet] = useState("");
-  const [streetNumber, setStreetNumber] = useState("");
-  const [isDefault, setIsDefault] = useState(false);
+  const [commune, setCommune] = useState("")
+  const [street, setStreet] = useState("")
+  const [streetNumber, setStreetNumber] = useState("")
+  const [department, setDepartment] = useState("")
+  const [isDefault, setIsDefault] = useState(false)
 
   const handleSave = () => {
     // Guardado de dirección mientras sea solo front end
     console.log({
-      region,
-      city,
+      commune,
       street,
       streetNumber,
+      department,
       isDefault,
-    });
-    alert("Dirección guardada con éxito");
-  };
+    })
+    alert("Dirección guardada con éxito")
+
+    window.location.href = "/directions"
+  }
 
   return (
-    <div className="bg-gray-100 p-6 rounded-lg max-w-md mx-auto mt-5 shadow-lg relative w-11/12">
-      <h2 className="text-xl font-bold mb-5 text-center">
+    <div className='bg-gray-100 p-6 rounded-lg max-w-md mx-auto mt-5 shadow-lg relative w-11/12'>
+      <h2 className='text-xl font-bold mb-5 text-center'>
         Modifica tu dirección
       </h2>
 
       {/* Botón "Volver al perfil" como una X */}
       <Link
-        to="/directions"
-        className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700"
-        aria-label="Cerrar"
+        to='/directions'
+        className='absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700'
+        aria-label='Cerrar'
       >
         &times;
       </Link>
 
-      <form className="flex flex-col gap-4">
-        <div className="flex flex-col">
-          <label className="mb-1 text-sm font-bold">Región</label>
+      <form
+        className='flex flex-col gap-4'
+        onSubmit={(e) => {
+          e.preventDefault()
+          if (!commune || !street || !streetNumber) {
+            alert("Por favor, complete todos los campos obligatorios.")
+            return
+          }
+          handleSave()
+        }}
+      >
+        <div className='flex flex-col'>
+          <label className='mb-1 text-sm font-bold'>Comuna</label>
           <input
-            type="text"
-            value={region}
-            onChange={(e) => setRegion(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md text-base"
+            type='text'
+            value={commune}
+            onChange={(e) => setCommune(e.target.value)}
+            className='p-2 border border-gray-300 rounded-md text-base'
+            placeholder='Ingrese la comuna'
+            required
           />
         </div>
-        <div className="flex flex-col">
-          <label className="mb-1 text-sm font-bold">Ciudad</label>
+        <div className='flex flex-col'>
+          <label className='mb-1 text-sm font-bold'>Calle</label>
           <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md text-base"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="mb-1 text-sm font-bold">Calle</label>
-          <input
-            type="text"
+            type='text'
             value={street}
             onChange={(e) => setStreet(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md text-base"
+            className='p-2 border border-gray-300 rounded-md text-base'
+            placeholder='Ingrese la calle'
+            required
           />
         </div>
-        <div className="flex flex-col">
-          <label className="mb-1 text-sm font-bold">N° de calle</label>
+        <div className='flex flex-col'>
+          <label className='mb-1 text-sm font-bold'>N° de calle</label>
           <input
-            type="text"
+            type='text'
             value={streetNumber}
             onChange={(e) => setStreetNumber(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md text-base"
+            className='p-2 border border-gray-300 rounded-md text-base'
+            placeholder='Ingrese el número'
+            required
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className='flex flex-col'>
+          <label className='mb-1 text-sm font-bold'>Detalles adicionales</label>
           <input
-            type="checkbox"
+            type='text'
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            className='p-2 border border-gray-300 rounded-md text-base'
+            placeholder='Ingrese el número de departamento si se vive en uno'
+          />
+        </div>
+        <div className='flex items-center gap-2'>
+          <input
+            type='checkbox'
             checked={isDefault}
             onChange={(e) => setIsDefault(e.target.checked)}
-            className="w-4 h-4"
+            className='w-4 h-4'
           />
-          <label className="text-sm">Hacer predeterminada esta dirección</label>
+          <label className='text-sm'>Hacer predeterminada esta dirección</label>
         </div>
         <button
-          type="button"
-          onClick={handleSave}
-          className="p-2 bg-gray-600 text-white rounded-md text-base hover:bg-gray-700"
+          type='submit'
+          className='p-2 bg-gray-600 text-white rounded-md text-base hover:bg-gray-700'
         >
           Guardar dirección
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ModifyDir;
+export default ModifyDir
