@@ -1,12 +1,12 @@
 const express = require("express")
 const { MongoClient, ObjectId } = require("mongodb")
 const bodyParser = require("body-parser")
-const bcrypt = require("bcrypt") // Aunque ahora no se usa para autenticación, se deja por si lo reactivas
-const jwt = require("jsonwebtoken") // Igual que bcrypt
+const bcrypt = require("bcrypt") 
+const jwt = require("jsonwebtoken") 
 
 const app = express()
 const port = 3000
-const jwtSecret = "tu_secreto_super_seguro" // Ya no es tan importante sin autenticación
+const jwtSecret = "tu_secreto_super_seguro" 
 
 app.use(bodyParser.json())
 
@@ -192,7 +192,7 @@ app.post("/usuarios/registro", async (req, res) => {
   }
   try {
     const db = client.db()
-    const nuevoUsuario = { nombre, email, password } // No se usa bcrypt para hashear la contraseña
+    const nuevoUsuario = { nombre, email, password } 
     const result = await db.collection("usuarios").insertOne(nuevoUsuario)
     res.status(201).json({ _id: result.insertedId, ...nuevoUsuario })
   } catch (error) {
@@ -210,7 +210,7 @@ app.post("/usuarios/login", async (req, res) => {
     if (!usuario) {
       return res.status(404).json({ error: "Usuario no encontrado" })
     }
-    // No se verifica la contraseña con bcrypt
+ 
     const token = jwt.sign({ userId: usuario._id }, jwtSecret, {
       expiresIn: "1h",
     })
@@ -220,72 +220,72 @@ app.post("/usuarios/login", async (req, res) => {
   }
 })
 app.get("/usuarios/perfil", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.put("/usuarios/perfil", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.post("/usuarios/logout", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 
 // --- Direcciones ---
 app.get("/usuarios/direcciones", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+
 })
 app.get("/usuarios/direcciones/:direccionId", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+
 })
 app.post("/usuarios/direcciones", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.put("/usuarios/direcciones/:direccionId", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.delete("/usuarios/direcciones/:direccionId", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 
 // --- Pedidos ---
 app.post("/pedidos", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.get("/pedidos", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.get("/pedidos/:pedidoId", async (req, res) => {
-  /* ... (ya no requiere autenticación) */
+  
 })
 app.put("/pedidos/:pedidoId", async (req, res) => {
-  /* ... (ya no requiere autenticación admin) */
+  
 })
 app.post("/pedidos/:pedidoId/anular", async (req, res) => {
-  /* ... */
+  
 })
 
 // --- Despachos ---
 app.get("/despachos/:despachoId", async (req, res) => {
-  /* ... (ya no requiere autenticación admin/repartidor) */
+  
 })
 app.put("/despachos/:despachoId", async (req, res) => {
-  /* ... (ya no requiere autenticación admin/repartidor) */
+ 
 })
 
 // --- Ingredientes ---
 app.get("/ingredientes", async (req, res) => {
-  /* ... (ya no requiere autenticación admin) */
+  
 })
 app.get("/ingredientes/:ingredienteId", async (req, res) => {
-  /* ... (ya no requiere autenticación admin) */
+  
 })
 app.post("/ingredientes", async (req, res) => {
-  /* ... (ahora accesible sin admin) */
+  
 })
 app.put("/ingredientes/:ingredienteId", async (req, res) => {
-  /* ... (ahora accesible sin admin) */
+  
 })
 app.delete("/ingredientes/:ingredienteId", async (req, res) => {
-  /* ... (ahora accesible sin admin) */
+ 
 })
 
 app.listen(port, () => {
