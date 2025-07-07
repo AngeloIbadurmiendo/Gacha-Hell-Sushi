@@ -5,7 +5,7 @@ const pages = [
   { name: "Home", path: "/" },
   { name: "Iniciar sesión", path: "/login" },
   { name: "Registro", path: "/signup" },
-  { name: "Tu cuenta", path: "/profile" },
+  { name: "Tu cuenta", path: "/perfil" },
 ]
 
 const NavBar = () => {

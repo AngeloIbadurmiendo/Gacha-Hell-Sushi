@@ -31,15 +31,7 @@ const AppRouter = () => {
         <Route path='/admin_orders' element={<AdminOrders />} />
         <Route path='/admin_users' element={<AdminUsers />} />
         <Route path='/admin_products' element={<AdminProducts />} />
-        <Route
-          path='/profile'
-          element={
-            <Profile
-              username='John Doe'
-              avatarUrl='https://example.com/avatar.jpg'
-            />
-          }
-        />
+        <Route path="/perfil" element={<Profile />} />
       </Routes>
     </div>
   )

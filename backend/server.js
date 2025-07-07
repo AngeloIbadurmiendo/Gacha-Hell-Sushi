@@ -1,14 +1,18 @@
 const express = require('express');
-const { MongoClient, ObjectId } = require('mongodb'); // Necesitas ObjectId para trabajar con _id en MongoDB
-const bodyParser = require('body-parser'); // Para analizar el cuerpo de las solicitudes JSON
+const cors = require('cors'); // <--- agrega aquí
 
-const app = express();
+const { MongoClient, ObjectId } = require('mongodb');
+const bodyParser = require('body-parser');
+
+const app = express(); // <--- primero inicializa la app
 const port = 3000;
+
+app.use(cors());
 
 // Middleware para analizar el cuerpo de las solicitudes JSON
 app.use(bodyParser.json());
 
-const uri = 'mongodb://localhost:27017/mi_tienda_online'; // Asegúrate que tu MongoDB esté corriendo y la DB exista
+const uri = 'mongodb://localhost:27017/gacha-hell-sushi'; // Asegúrate que tu MongoDB esté corriendo y la DB exista
 const client = new MongoClient(uri);
 
 async function connectToMongo() {
