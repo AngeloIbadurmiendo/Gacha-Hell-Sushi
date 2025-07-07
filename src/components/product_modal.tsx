@@ -4,13 +4,15 @@ interface ProductModalProps {
   isOpen: boolean;
   onClose: () => void;
   product: {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
+    _id: string;
+    nombre: string;
+    descripcion: string;
+    precioBase: number;
+    descuento?: number;
+    imagenURL: string;
   };
 }
+
 
 const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -22,7 +24,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
   };
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${product.name} to the cart.`);
+    console.log(`Added ${quantity} of ${product.nombre} to the cart.`);
     onClose();
   };
 
@@ -53,13 +55,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
         {/* Product Details */}
         <div className="p-4">
           <img
-            src={product.image}
-            alt={product.name}
+            src={product.imagenURL}
+            alt={product.nombre}
             className="w-full h-48 object-contain rounded-lg mb-4"
           />
-          <h2 className="text-xl font-bold">{product.name}</h2>
-          <p className="text-gray-600">{product.description}</p>
-          <p className="text-lg font-semibold mt-2">${product.price.toFixed(2)}</p>
+          <h2 className="text-xl font-bold">{product.nombre}</h2>
+          <p className="text-gray-600">{product.descripcion}</p>
+          <p className="text-lg font-semibold mt-2">${product.precioBase.toFixed(2)}</p>
         </div>
 
         {/* Sticky Footer */}
