@@ -505,6 +505,20 @@ app.put("/usuarios/perfil", async (req, res) => {
   }
 })
 
+// GET /usuarios (Lista de usuarios - solo para admin, no implementado aquí)
+app.get("/usuarios", async (req, res) => {
+  try {
+    const usuariosCollection = client.db().collection("usuarios")
+    const usuarios = await usuariosCollection.find({}).toArray()
+    res.status(200).json(usuarios)
+  } catch (error) {
+    console.error("Error al obtener usuarios:", error)
+    res
+      .status(500)
+      .json({ message: "Error interno del servidor al obtener usuarios" })
+  }
+})
+
 // POST /usuarios/logout (No hace nada significativo sin JWT, solo mensaje)
 app.post("/usuarios/logout", async (req, res) => {
   res
