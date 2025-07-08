@@ -863,6 +863,48 @@ app.get("/pedidos/:pedidoId", async (req, res) => {
   }
 })
 
+// GET /pedidos_admin
+app.get("/pedidos_admin", async (req, res) => {
+  try {
+    const pedidosCollection = client.db().collection("pedidos")
+    const usuariosCollection = client.db().collection("usuarios")
+
+    // Aggregate para traer el correo del usuario
+    const pedidos = await pedidosCollection
+      .aggregate([
+        {
+          $lookup: {
+            from: "usuarios",
+            localField: "usuario_id",
+            foreignField: "_id",
+            as: "usuario",
+          },
+        },
+        {
+          $unwind: "$usuario",
+        },
+        {
+          $addFields: {
+            correoUsuario: "$usuario.correo",
+          },
+        },
+        {
+          $project: {
+            usuario: 0, // No enviar el objeto usuario completo
+          },
+        },
+      ])
+      .toArray()
+
+    res.status(200).json(pedidos)
+  } catch (error) {
+    console.error("Error al obtener pedidos (admin):", error)
+    res
+      .status(500)
+      .json({ message: "Error interno del servidor al obtener los pedidos" })
+  }
+})
+
 // PUT /pedidos/:pedidoId (Actualizar estado del pedido - sin admin check)
 app.put("/pedidos/:pedidoId", async (req, res) => {
   try {
