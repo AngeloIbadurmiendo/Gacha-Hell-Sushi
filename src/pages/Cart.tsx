@@ -25,18 +25,20 @@ interface Direccion {
 
 const Cart: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-  const localCart = localStorage.getItem("cart");
-  try {
-    return localCart ? JSON.parse(localCart) : [];
-  } catch {
-    return [];
-  }
-});
+    const localCart = localStorage.getItem("cart");
+    try {
+      return localCart ? JSON.parse(localCart) : [];
+    } catch {
+      return [];
+    }
+  });
+
   const [direcciones, setDirecciones] = useState<Direccion[]>([]);
   const [direccionSeleccionada, setDireccionSeleccionada] = useState<string>("");
-  const [metodoPago, setMetodoPago] = useState<string>("Efectivo");
+  const [metodoPago, setMetodoPago] = useState<string>("Webpay");
   const [costoDespacho, setCostoDespacho] = useState<number>(2000);
   const [loading, setLoading] = useState(false);
+  const [showWebpay, setShowWebpay] = useState(false);
 
   const userId = getUserId();
 
@@ -119,6 +121,7 @@ const Cart: React.FC = () => {
     0
   );
 
+  // Checkout SOLO se ejecuta cuando aprueba el pago simulado
   const handleCheckout = async () => {
     if (!userId) {
       alert("Debes iniciar sesión.");
@@ -152,8 +155,8 @@ const Cart: React.FC = () => {
       const data = await res.json();
       if (res.ok) {
         alert("¡Pedido realizado correctamente! ID: " + data.pedidoId);
-        setCartItems([]);                // <-- SOLO SE VACÍA AL PEDIR
-        localStorage.removeItem("cart"); // <-- SOLO SE ELIMINA AL PEDIR
+        setCartItems([]);
+        localStorage.removeItem("cart");
       } else {
         alert("Error: " + (data.message || "Error al crear pedido."));
       }
@@ -164,6 +167,40 @@ const Cart: React.FC = () => {
     }
   };
 
+  // --- SIMULACION WEBPAY ---
+  if (showWebpay) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-xs">
+          <h2 className="text-xl font-bold mb-4 text-blue-900">Webpay (Simulado)</h2>
+          <p className="mb-6">Esta es una simulación de pago Webpay.<br />¿Deseas aprobar el pago?</p>
+          <div className="flex gap-4 justify-center">
+            <button
+              className="bg-green-600 text-white px-4 py-2 rounded-lg font-semibold"
+              onClick={async () => {
+                setLoading(true);
+                setShowWebpay(false); // Oculta el modal
+                await handleCheckout();
+                setLoading(false);
+              }}
+              disabled={loading}
+            >
+              Aprobar pago
+            </button>
+            <button
+              className="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold"
+              onClick={() => setShowWebpay(false)}
+              disabled={loading}
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // --- RENDER PRINCIPAL ---
   return (
     <div className="bg-gray-100 p-5 rounded-lg max-w-md mx-auto relative w-11/12 mt-4">
       <h2 className="text-3xl font-bold mb-5 text-center">Carrito</h2>
@@ -236,8 +273,7 @@ const Cart: React.FC = () => {
           value={metodoPago}
           onChange={(e) => setMetodoPago(e.target.value)}
         >
-          <option value="Efectivo">Efectivo</option>
-          <option value="Tarjeta">Tarjeta</option>
+          <option value="Webpay">Webpay</option>
         </select>
       </div>
       <div className="mt-3 flex justify-between">
@@ -251,7 +287,7 @@ const Cart: React.FC = () => {
         </p>
         <button
           className="px-4 py-2 bg-blue-900 text-white rounded-lg text-base w-full"
-          onClick={handleCheckout}
+          onClick={() => setShowWebpay(true)}
           disabled={loading || cartItems.length === 0}
         >
           {loading ? "Enviando pedido..." : "Ir a pagar"}

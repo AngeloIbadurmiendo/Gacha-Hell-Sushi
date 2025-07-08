@@ -10,12 +10,12 @@ type Pedido = {
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = useState<Pedido[]>([]);
+  const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
     if (!userId) {
       setError("No has iniciado sesión.");
       setLoading(false);
@@ -121,7 +121,7 @@ const Orders: React.FC = () => {
 
               {/* Botón de detalle */}
               <button
-                onClick={() => navigate(`/orders/${order._id}`)}
+                onClick={() => navigate(`/orders/${order._id}?userId=${userId}`)}
                 className="bg-blue-400 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg"
               >
                 Detalle
