@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const LoginAdmin: React.FC = () => {
   const [correo, setCorreo] = useState<string>("")
@@ -76,13 +76,6 @@ const LoginAdmin: React.FC = () => {
           Iniciar Sesión
         </button>
       </form>
-
-      <Link
-        to='/register_admin'
-        className='w-full bg-blue-400 text-white py-3 rounded-full text-center border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500'
-      >
-        Registrarse
-      </Link>
     </div>
   )
 }
