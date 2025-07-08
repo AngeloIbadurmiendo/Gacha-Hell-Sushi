@@ -100,13 +100,10 @@ app.post("/productos", async (req, res) => {
       descripcion,
       categoria_id,
     } = req.body
-    if (!nombre || precioBase === undefined || !categoria_id) {
+    if (!nombre || precioBase === undefined) {
       return res.status(400).json({
-        message: "Faltan campos obligatorios: nombre, precioBase, categoria_id",
+        message: "Faltan campos obligatorios: nombre, precioBase",
       })
-    }
-    if (!ObjectId.isValid(categoria_id)) {
-      return res.status(400).json({ message: "ID de categoría inválido" })
     }
 
     const productosCollection = client.db().collection("productos")
@@ -117,7 +114,11 @@ app.post("/productos", async (req, res) => {
       descuento: Number(descuento) || 0,
       disponibilidad: Number(disponibilidad) || 0,
       descripcion: descripcion || "",
-      categoria_id: new ObjectId(categoria_id),
+    }
+
+    // Solo agrega categoria_id si es válido y no null
+    if (categoria_id && ObjectId.isValid(categoria_id)) {
+      newProduct.categoria_id = new ObjectId(categoria_id)
     }
 
     const result = await productosCollection.insertOne(newProduct)
@@ -860,6 +861,48 @@ app.get("/pedidos/:pedidoId", async (req, res) => {
     res
       .status(500)
       .json({ message: "Error interno del servidor al obtener el pedido" })
+  }
+})
+
+// GET /pedidos_admin
+app.get("/pedidos_admin", async (req, res) => {
+  try {
+    const pedidosCollection = client.db().collection("pedidos")
+    const usuariosCollection = client.db().collection("usuarios")
+
+    // Aggregate para traer el correo del usuario
+    const pedidos = await pedidosCollection
+      .aggregate([
+        {
+          $lookup: {
+            from: "usuarios",
+            localField: "usuario_id",
+            foreignField: "_id",
+            as: "usuario",
+          },
+        },
+        {
+          $unwind: "$usuario",
+        },
+        {
+          $addFields: {
+            correoUsuario: "$usuario.correo",
+          },
+        },
+        {
+          $project: {
+            usuario: 0, // No enviar el objeto usuario completo
+          },
+        },
+      ])
+      .toArray()
+
+    res.status(200).json(pedidos)
+  } catch (error) {
+    console.error("Error al obtener pedidos (admin):", error)
+    res
+      .status(500)
+      .json({ message: "Error interno del servidor al obtener los pedidos" })
   }
 })
 
