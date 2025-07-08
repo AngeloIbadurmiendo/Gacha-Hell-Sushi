@@ -13,7 +13,6 @@ interface ProductModalProps {
   };
 }
 
-
 const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -24,8 +23,31 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
   };
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${product.nombre} to the cart.`);
-    onClose();
+  // Leer el carrito actual
+  const cartStr = localStorage.getItem("cart");
+  let cart = cartStr ? JSON.parse(cartStr) : [];
+
+  // Buscar si ya existe el producto en el carrito (usa _id)
+  const existingIndex = cart.findIndex((item: any) => item._id === product._id);
+
+  if (existingIndex !== -1) {
+    // Sumar la cantidad
+    cart[existingIndex].quantity += quantity;
+  } else {
+    // Agregar como nuevo
+    cart.push({
+      _id: product._id,
+      nombre: product.nombre,
+      precioBase: product.precioBase,
+      imagenURL: product.imagenURL,
+      quantity: quantity
+    });
+  }
+
+  // Guardar actualizado
+  localStorage.setItem("cart", JSON.stringify(cart));
+  window.dispatchEvent(new Event("cart-updated"));
+  onClose();
   };
 
   return (

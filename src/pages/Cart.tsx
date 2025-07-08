@@ -1,147 +1,260 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
+// Util para obtener el userId del localStorage
+function getUserId() {
+  return localStorage.getItem("userId") || "";
+}
+
+// Tipos de datos
 interface CartItem {
-  id: number;
-  name: string;
-  price: number;
+  _id: string;
+  nombre: string;
+  precioBase: number;
+  imagenURL: string;
   quantity: number;
-  image: string;
+}
+
+interface Direccion {
+  _id: string;
+  calle: string;
+  numero: string;
+  comuna: string;
+  departamento?: string;
+  predeterminado?: boolean;
 }
 
 const Cart: React.FC = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: 'Palta Roll',
-      price: 4990,
-      quantity: 1,
-      image:
-        'https://www.smartienda.cl/smartwebsite/pruebas/7013/rpa.jpg', // Ajusta la URL a tu icono o imagen
-    },
-    {
-      id: 2,
-      name: 'Sésamo Roll',
-      price: 6990,
-      quantity: 1,
-      image:
-        'https://www.creativefabrica.com/wp-content/uploads/2023/03/02/Sushi-California-Roll-Single-Slice-62976322-1.png', // Ajusta la URL a tu icono o imagen
-    },
-    {
-      id: 3,
-      name: 'Nori Roll',
-      price: 4990,
-      quantity: 1,
-      image:
-        'https://sushiblues.cl/cdn/shop/files/RollYasai.jpg?v=1710212178', // Ajusta la URL a tu icono o imagen
-    },
-  ]);
-  const navigate = useNavigate();
-  // Maneja el incremento de la cantidad de un producto
-  const handleIncrement = (id: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+  const localCart = localStorage.getItem("cart");
+  try {
+    return localCart ? JSON.parse(localCart) : [];
+  } catch {
+    return [];
+  }
+});
+  const [direcciones, setDirecciones] = useState<Direccion[]>([]);
+  const [direccionSeleccionada, setDireccionSeleccionada] = useState<string>("");
+  const [metodoPago, setMetodoPago] = useState<string>("Efectivo");
+  const [costoDespacho, setCostoDespacho] = useState<number>(2000);
+  const [loading, setLoading] = useState(false);
+
+  const userId = getUserId();
+
+  // Solo lee el carrito UNA VEZ al montar
+  useEffect(() => {
+    const localCart = localStorage.getItem("cart");
+    if (localCart) {
+      try {
+        setCartItems(JSON.parse(localCart));
+      } catch (e) {
+        alert("¡Error leyendo el carrito! Vacía el cart manualmente.");
+        console.error("Error parseando el carrito:", e, localCart);
+      }
+    }
+  }, []);
+
+  // Guarda el carrito cada vez que cambie (evita race condition)
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // Sincroniza entre pestañas y cuando otro componente (como el modal) actualiza el cart
+  useEffect(() => {
+    const updateCart = () => {
+      const localCart = localStorage.getItem("cart");
+      setCartItems(localCart ? JSON.parse(localCart) : []);
+    };
+    window.addEventListener("cart-updated", updateCart);
+    window.addEventListener("storage", updateCart);
+    return () => {
+      window.removeEventListener("cart-updated", updateCart);
+      window.removeEventListener("storage", updateCart);
+    };
+  }, []);
+
+  // Direcciones al montar/cambiar usuario
+  useEffect(() => {
+    if (!userId) {
+      setDirecciones([]);
+      setDireccionSeleccionada("");
+      return;
+    }
+    fetch(`http://localhost:3000/usuarios/direcciones?userId=${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        setDirecciones(data);
+        if (data.length > 0) {
+          const pred = data.find((d: Direccion) => d.predeterminado) || data[0];
+          setDireccionSeleccionada(pred._id);
+        }
+      })
+      .catch(() => setDirecciones([]));
+  }, [userId]);
+
+  // -------- FUNCIONES DE CARRITO --------
+  const handleIncrement = (_id: string) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   };
 
-  // Maneja el decremento de la cantidad de un producto
-  const handleDecrement = (id: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 1
+  const handleDecrement = (_id: string) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item._id === _id && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
       )
     );
   };
 
-  // Maneja la eliminación de un producto del carrito
-  const handleDelete = (id: number) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== id)
-    );
+  const handleDelete = (_id: string) => {
+    setCartItems(prev => prev.filter(item => item._id !== _id));
   };
 
-  // Calcula el subtotal multiplicando precio * cantidad
   const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + item.precioBase * item.quantity,
     0
   );
-  
-  // Redirige al pulsar "Ir a pagar"
-  const handleCheckout = () => {
-    navigate("/checkout"); // Redirige a la página de checkout
+
+  const handleCheckout = async () => {
+    if (!userId) {
+      alert("Debes iniciar sesión.");
+      return;
+    }
+    if (!direccionSeleccionada) {
+      alert("Selecciona una dirección de envío.");
+      return;
+    }
+    if (cartItems.length === 0) {
+      alert("El carrito está vacío.");
+      return;
+    }
+    setLoading(true);
+    const pedido = {
+      usuario_id: userId,
+      direccionEnvio_id: direccionSeleccionada,
+      metodoPago,
+      costoDespacho,
+      items: cartItems.map(item => ({
+        productoId: item._id,
+        cantidad: item.quantity
+      }))
+    };
+    try {
+      const res = await fetch("http://localhost:3000/pedidos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(pedido),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("¡Pedido realizado correctamente! ID: " + data.pedidoId);
+        setCartItems([]);                // <-- SOLO SE VACÍA AL PEDIR
+        localStorage.removeItem("cart"); // <-- SOLO SE ELIMINA AL PEDIR
+      } else {
+        alert("Error: " + (data.message || "Error al crear pedido."));
+      }
+    } catch (e: any) {
+      alert("Error de red: " + e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="bg-gray-100 p-5 rounded-lg max-w-md mx-auto relative w-11/12 mt-4">
-      {/* Título */}
       <h2 className="text-3xl font-bold mb-5 text-center">Carrito</h2>
-
-      {/* Lista de ítems del carrito */}
+      {/* Lista del carrito */}
       <div className="flex flex-col gap-4">
+        {cartItems.length === 0 && (
+          <p className="text-center text-gray-500">Tu carrito está vacío.</p>
+        )}
         {cartItems.map((item) => (
           <div
-            key={item.id}
-            className="flex items-center justify-between p-5 bg-white rounded-lg shadow-[0_4px_6px_rgba(0,0,0,0.5)] flex-wrap gap-2"
+            key={item._id}
+            className="flex items-center justify-between p-5 bg-white rounded-lg shadow flex-wrap gap-2"
           >
-            {/* Imagen del producto */}
             <img
-              src={item.image}
-              alt={item.name}
-              className="w-16 h-16 object-contain rounded-md mr-3 "
+              src={item.imagenURL}
+              alt={item.nombre}
+              className="w-16 h-16 object-contain rounded-md mr-3"
             />
-
-            {/* Nombre y precio */}
             <div className="flex-1 min-w-[120px]">
-              <p className="text-base font-bold">{item.name}</p>
+              <p className="text-base font-bold">{item.nombre}</p>
               <p className="text-sm text-gray-600">
-                ${item.price.toLocaleString('es-CL')}
+                ${item.precioBase.toLocaleString("es-CL")}
               </p>
             </div>
-
-            {/* Botones +, - y cantidad */}
-            <div className="flex items-center gap-1/4 bg-blue-400 rounded-full text-white">
+            <div className="flex items-center bg-blue-400 rounded-full text-white">
               <button
-                className=" rounded-md px-2 font-bold"
-                onClick={() => handleDecrement(item.id)}
+                className="rounded-md px-2 font-bold"
+                onClick={() => handleDecrement(item._id)}
               >
                 -
               </button>
               <p className="w-6 text-center">{item.quantity}</p>
               <button
-                className=" rounded-md px-2 font-bold"
-                onClick={() => handleIncrement(item.id)}
+                className="rounded-md px-2 font-bold"
+                onClick={() => handleIncrement(item._id)}
               >
                 +
               </button>
             </div>
-
-            {/* Botón para borrar el ítem */}
             <button
               className="text-white bg-red-400 rounded-md px-2 py-1"
-              onClick={() => handleDelete(item.id)}
+              onClick={() => handleDelete(item._id)}
             >
               🗑
             </button>
           </div>
         ))}
       </div>
-
+      {/* Selección de dirección y método de pago */}
+      <div className="mt-4">
+        <label className="block font-semibold mb-1">Dirección de envío:</label>
+        <select
+          className="w-full p-2 rounded border"
+          value={direccionSeleccionada}
+          onChange={(e) => setDireccionSeleccionada(e.target.value)}
+        >
+          <option value="">Selecciona una dirección...</option>
+          {direcciones.map((dir) => (
+            <option key={dir._id} value={dir._id}>
+              {dir.calle} {dir.numero}
+              {dir.departamento ? `, Depto ${dir.departamento}` : ""} - {dir.comuna}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mt-3">
+        <label className="block font-semibold mb-1">Método de pago:</label>
+        <select
+          className="w-full p-2 rounded border"
+          value={metodoPago}
+          onChange={(e) => setMetodoPago(e.target.value)}
+        >
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta">Tarjeta</option>
+        </select>
+      </div>
+      <div className="mt-3 flex justify-between">
+        <span className="font-semibold">Costo despacho:</span>
+        <span>${costoDespacho.toLocaleString("es-CL")}</span>
+      </div>
       {/* Subtotal y botón para pagar */}
       <div className="mt-4 flex flex-col items-end">
         <p className="text-lg font-semibold mb-2">
-          Subtotal: ${subtotal.toLocaleString('es-CL')}
+          Subtotal: ${subtotal.toLocaleString("es-CL")}
         </p>
         <button
           className="px-4 py-2 bg-blue-900 text-white rounded-lg text-base w-full"
           onClick={handleCheckout}
+          disabled={loading || cartItems.length === 0}
         >
-          Ir a pagar
+          {loading ? "Enviando pedido..." : "Ir a pagar"}
         </button>
       </div>
     </div>
@@ -149,3 +262,4 @@ const Cart: React.FC = () => {
 };
 
 export default Cart;
+

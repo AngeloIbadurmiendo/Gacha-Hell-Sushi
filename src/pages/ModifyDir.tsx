@@ -8,19 +8,44 @@ const ModifyDir: React.FC = () => {
   const [department, setDepartment] = useState("")
   const [isDefault, setIsDefault] = useState(false)
 
-  const handleSave = () => {
-    // Guardado de dirección mientras sea solo front end
-    console.log({
-      commune,
-      street,
-      streetNumber,
-      department,
-      isDefault,
-    })
-    alert("Dirección guardada con éxito")
-
-    window.location.href = "/directions"
+  const handleSave = async () => {
+  // Reemplaza esto por tu forma real de obtener el ID del usuario logueado
+  const usuario_id = localStorage.getItem("userId");
+  if (!usuario_id) {
+    alert("No has iniciado sesión.");
+    return;
   }
+
+  const nuevaDireccion = {
+    usuario_id,
+    calle: street,
+    numero: streetNumber,
+    department,
+    comuna: commune,
+    predeterminado: isDefault
+  };
+
+  try {
+    const res = await fetch("http://localhost:3000/usuarios/direcciones", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(nuevaDireccion)
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("Dirección guardada con éxito");
+      window.location.href = "/directions";
+    } else {
+      alert(data.message || "Error al guardar dirección");
+    }
+  } catch (error) {
+    alert("Error de conexión con el servidor");
+  }
+};
+
 
   return (
     <div className='bg-gray-100 p-6 rounded-lg max-w-md mx-auto mt-5 shadow-lg relative w-11/12'>
