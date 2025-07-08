@@ -20,7 +20,7 @@ const AdminProducts: React.FC = () => {
     disponibilidad: 0,
     descripcion: "",
     imagenURL: "",
-    categoria_id: "", // Si usas categorías, puedes pedir el ID aquí
+    categoria_id: null, // Cambiado a null por default
   })
 
   // Obtener productos desde la base de datos
@@ -48,7 +48,7 @@ const AdminProducts: React.FC = () => {
           disponibilidad: 0,
           descripcion: "",
           imagenURL: "",
-          categoria_id: "",
+          categoria_id: null,
         })
         // Refresca la lista
         const updated = await fetch("http://localhost:3000/productos").then(
