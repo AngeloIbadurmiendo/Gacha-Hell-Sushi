@@ -206,11 +206,12 @@ const AdminProducts: React.FC = () => {
               </label>
               <input
                 type='number'
-                value={newProduct.precioBase}
+                value={newProduct.precioBase === 0 ? "" : newProduct.precioBase}
                 onChange={(e) =>
                   setNewProduct({ ...newProduct, precioBase: +e.target.value })
                 }
                 className='p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500'
+                placeholder='0'
               />
             </div>
             <div className='mb-4'>
@@ -219,11 +220,12 @@ const AdminProducts: React.FC = () => {
               </label>
               <input
                 type='number'
-                value={newProduct.descuento}
+                value={newProduct.descuento === 0 ? "" : newProduct.descuento}
                 onChange={(e) =>
                   setNewProduct({ ...newProduct, descuento: +e.target.value })
                 }
                 className='p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500'
+                placeholder='0'
               />
             </div>
             <div className='mb-4'>
@@ -232,7 +234,11 @@ const AdminProducts: React.FC = () => {
               </label>
               <input
                 type='number'
-                value={newProduct.disponibilidad}
+                value={
+                  newProduct.disponibilidad === 0
+                    ? ""
+                    : newProduct.disponibilidad
+                }
                 onChange={(e) =>
                   setNewProduct({
                     ...newProduct,
@@ -240,6 +246,7 @@ const AdminProducts: React.FC = () => {
                   })
                 }
                 className='p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500'
+                placeholder='0'
               />
             </div>
             <div className='mb-4'>
