@@ -13,6 +13,8 @@ import AdminView from "../pages/admin_view"
 import AdminOrders from "../pages/admin_orders"
 import AdminUsers from "../pages/admin_users"
 import AdminProducts from "../pages/admin_products"
+import LoginAdmin from "../pages/admin_login"
+import SignupAdmin from "../pages/admin_register"
 
 const AppRouter = () => {
   return (
@@ -31,7 +33,9 @@ const AppRouter = () => {
         <Route path='/admin_orders' element={<AdminOrders />} />
         <Route path='/admin_users' element={<AdminUsers />} />
         <Route path='/admin_products' element={<AdminProducts />} />
-        <Route path="/perfil" element={<Profile />} />
+        <Route path='/perfil' element={<Profile />} />
+        <Route path='/login_admin' element={<LoginAdmin />} />
+        <Route path='/register_admin' element={<SignupAdmin />} />
       </Routes>
     </div>
   )
